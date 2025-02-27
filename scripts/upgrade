@@ -35,7 +35,7 @@ ynh_script_progression "Upgrading system configurations related to $app..."
 
 ynh_config_add_systemd
 
-yunohost service add "$app" --description="A short description of the app" --log="/var/log/$app/$app.log"
+yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE

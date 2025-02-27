@@ -14,7 +14,7 @@ maintainers = []
 [upstream]
 license = "Apache-2.0"
 website = "https://prometheus.io/docs/guides/node-exporter/"
-admindoc = "https://prometheus.io/docs/guides/node-exporter/""
+admindoc = "https://prometheus.io/docs/guides/node-exporter/"
 code = "https://github.com/prometheus/node_exporter"
 
 [integration]
