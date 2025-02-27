@@ -22,11 +22,6 @@ Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written
 
 
 **Paketatutako bertsioa:** 1.9.0~ynh1
-
-## Pantaila-argazkiak
-
-![Node Exporter(r)en pantaila-argazkia](./doc/screenshots/example.jpg)
-
 ## Dokumentazioa eta baliabideak
 
 - Aplikazioaren webgune ofiziala: <https://prometheus.io/docs/guides/node-exporter/>

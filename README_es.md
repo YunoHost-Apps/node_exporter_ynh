@@ -22,11 +22,6 @@ Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written
 
 
 **Versión actual:** 1.9.0~ynh1
-
-## Capturas
-
-![Captura de Node Exporter](./doc/screenshots/example.jpg)
-
 ## Documentaciones y recursos
 
 - Sitio web oficial: <https://prometheus.io/docs/guides/node-exporter/>
