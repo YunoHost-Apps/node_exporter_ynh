@@ -1,7 +1,0 @@
-SOURCE_URL=https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-arm64.tar.gz
-SOURCE_SUM=b78464d8bd1b770a7f818d20c78410090f64a91b13577f1883dca1eec5aedbc9
-SOURCE_SUM_PRG=sha256sum
-SOURCE_FORMAT=tar.gz
-SOURCE_IN_SUBDIR=true
-SOURCE_FILENAME=node_exporter-1.2.2.linux-arm64.tar.gz
-SOURCE_EXTRACT=true
