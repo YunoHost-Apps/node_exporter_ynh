@@ -30,6 +30,7 @@ Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written
 ## 文档与资源
 
 - 官方应用网站： <https://prometheus.io/docs/guides/node-exporter/>
+- 官方管理文档： <https://prometheus.io/docs/guides/node-exporter/>
 - 上游应用代码库： <https://github.com/prometheus/node_exporter>
 - YunoHost 商店： <https://apps.yunohost.org/app/node_exporter>
 - 报告 bug： <https://github.com/YunoHost-Apps/node_exporter_ynh/issues>

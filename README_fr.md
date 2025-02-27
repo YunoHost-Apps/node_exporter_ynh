@@ -29,6 +29,7 @@ Exportateur Prometheus pour les métriques matérielles et OS exposées par les 
 ## Documentations et ressources
 
 - Site officiel de l’app : <https://prometheus.io/docs/guides/node-exporter/>
+- Documentation officielle de l’admin : <https://prometheus.io/docs/guides/node-exporter/>
 - Dépôt de code officiel de l’app : <https://github.com/prometheus/node_exporter>
 - YunoHost Store : <https://apps.yunohost.org/app/node_exporter>
 - Signaler un bug : <https://github.com/YunoHost-Apps/node_exporter_ynh/issues>

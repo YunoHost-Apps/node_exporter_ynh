@@ -30,6 +30,7 @@ Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written
 ## Dokumentasi dan sumber daya
 
 - Website aplikasi resmi: <https://prometheus.io/docs/guides/node-exporter/>
+- Dokumentasi admin resmi: <https://prometheus.io/docs/guides/node-exporter/>
 - Depot kode aplikasi hulu: <https://github.com/prometheus/node_exporter>
 - Gudang YunoHost: <https://apps.yunohost.org/app/node_exporter>
 - Laporkan bug: <https://github.com/YunoHost-Apps/node_exporter_ynh/issues>
