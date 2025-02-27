@@ -4,8 +4,8 @@ packaging_format = 2
 
 id = "node_exporter"
 name = "Node Exporter"
-description.en = "Node exporter for Prometheus"
-description.fr = "Node exporter pour Prometheus"
+description.en = "Monitor YunoHost with prometheus"
+description.fr = "Surveiller YunoHost avec prometheus"
 
 version = "1.9.0~ynh1"
 
