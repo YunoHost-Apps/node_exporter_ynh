@@ -18,32 +18,19 @@ Ini TIDAK boleh diedit dengan tangan.
 
 ## Ringkasan
 
+Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
 
 
-**Versi terkirim:** 1.2.0~ynh1
+**Versi terkirim:** 1.9.0~ynh1
 
 ## Tangkapan Layar
 
 ![Tangkapan Layar pada Node Exporter](./doc/screenshots/example.jpg)
 
-## Sangkalan / informasi penting
-
-* Any known limitations, constrains or stuff not working, such as (but not limited to):
-    * requiring a full dedicated domain ?
-    * architectures not supported ?
-    * not-working single-sign on or LDAP integration ?
-    * the app requires an important amount of RAM / disk / .. to install or to work properly
-    * etc...
-
-* Other infos that people should be aware of, such as:
-    * any specific step to perform after installing (such as manually finishing the install, specific admin credentials, ...)
-    * how to configure / administrate the application if it ain't obvious
-    * upgrade process / specificities / things to be aware of ?
-    * security considerations ?
-
 ## Dokumentasi dan sumber daya
 
 - Website aplikasi resmi: <https://prometheus.io/docs/guides/node-exporter/>
+- Dokumentasi admin resmi: <https://prometheus.io/docs/guides/node-exporter/>
 - Depot kode aplikasi hulu: <https://github.com/prometheus/node_exporter>
 - Gudang YunoHost: <https://apps.yunohost.org/app/node_exporter>
 - Laporkan bug: <https://github.com/YunoHost-Apps/node_exporter_ynh/issues>

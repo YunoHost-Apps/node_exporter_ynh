@@ -18,32 +18,19 @@ Hij mag NIET handmatig aangepast worden.
 
 ## Overzicht
 
+Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
 
 
-**Geleverde versie:** 1.2.0~ynh1
+**Geleverde versie:** 1.9.0~ynh1
 
 ## Schermafdrukken
 
 ![Schermafdrukken van Node Exporter](./doc/screenshots/example.jpg)
 
-## Uitsluitingen / belangrijke informatie
-
-* Any known limitations, constrains or stuff not working, such as (but not limited to):
-    * requiring a full dedicated domain ?
-    * architectures not supported ?
-    * not-working single-sign on or LDAP integration ?
-    * the app requires an important amount of RAM / disk / .. to install or to work properly
-    * etc...
-
-* Other infos that people should be aware of, such as:
-    * any specific step to perform after installing (such as manually finishing the install, specific admin credentials, ...)
-    * how to configure / administrate the application if it ain't obvious
-    * upgrade process / specificities / things to be aware of ?
-    * security considerations ?
-
 ## Documentatie en bronnen
 
 - Officiele website van de app: <https://prometheus.io/docs/guides/node-exporter/>
+- Officiele beheerdersdocumentatie: <https://prometheus.io/docs/guides/node-exporter/>
 - Upstream app codedepot: <https://github.com/prometheus/node_exporter>
 - YunoHost-store: <https://apps.yunohost.org/app/node_exporter>
 - Meld een bug: <https://github.com/YunoHost-Apps/node_exporter_ynh/issues>
