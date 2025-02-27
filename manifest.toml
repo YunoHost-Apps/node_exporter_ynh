@@ -50,7 +50,10 @@ ram.runtime = "50M"
     armhf.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-armv7.tar.gz"
     armhf.sha256 = "27ff7b105fd4cfc58c2762a6387d93e62eb55473cb5111eb5feb7086c60ef05f"
     
-    autoupdate.strategy = "latest_github_tag"
+    autoupdate.strategy = "latest_github_release"
+    autoupdate.asset.amd64 = ".*linux-amd64.tar.gz"
+    autoupdate.asset.armhf = ".*linux-armv7.tar.gz"
+    autoupdate.asset.arm64 = ".*linux-arm64.tar.gz"
 
     [resources.system_user]
 
