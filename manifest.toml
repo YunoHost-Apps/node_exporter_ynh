@@ -7,7 +7,7 @@ name = "Node Exporter"
 description.en = "Node exporter for Prometheus"
 description.fr = "Node exporter pour Prometheus"
 
-version = "1.2.0~ynh1"
+version = "1.9.0~ynh1"
 
 maintainers = []
 
@@ -31,7 +31,6 @@ ram.runtime = "50M"
 
 [install]
     [install.domain]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "domain"
 
     [install.init_main_permission]
@@ -43,10 +42,12 @@ ram.runtime = "50M"
     [resources.sources]
 
     [resources.sources.main]
-    amd64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz"
-    amd64.sha256 = "344bd4c0bbd66ff78f14486ec48b89c248139cdd485e992583ea30e89e0e5390"
-    arm64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz"
-    arm64.sha256 = "b78464d8bd1b770a7f818d20c78410090f64a91b13577f1883dca1eec5aedbc9"
+    amd64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz"
+    amd64.sha256 = "e7b65ea30eec77180487d518081d3dcb121b975f6d95f1866dfb9156c5b24075"
+    arm64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-arm64.tar.gz"
+    arm64.sha256 = "5314fae1efff19abf807cfc8bd7dadbd47a35565c1043c236ffb0689dc15ef4f"
+    armhf.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-arm64.tar.gz"
+    armhf.sha256 = "b78464d8bd1b770a7f818d20c78410090f64a91b13577f1883dca1eec5aedbc9"
     # autoupdate.strategy = "latest_github_tag"
 
     [resources.system_user]
