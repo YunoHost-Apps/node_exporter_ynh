@@ -37,6 +37,7 @@ ram.runtime = "9M"
     [install.ipv4_promotheus_server]
     ask = "Promotheus Server IPv4 Address/subnet (example: 89.234.56.78/24)"
     type = "string"
+    help = "from your promotheus server try `ip a` to found the IP/subnet"
 
 [resources]
 
