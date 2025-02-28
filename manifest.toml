@@ -36,7 +36,7 @@ ram.runtime = "9M"
 
     [install.init_main_permission]
     type = "group"
-    default = "visitors"
+    default = "admins"
 
 [resources]
 
