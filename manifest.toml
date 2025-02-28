@@ -34,10 +34,6 @@ ram.runtime = "9M"
     [install.domain]
     type = "domain"
 
-    [install.init_main_permission]
-    type = "group"
-    default = "visitors"
-
 [resources]
 
     [resources.sources]
@@ -61,6 +57,7 @@ ram.runtime = "9M"
 
     [resources.permissions]
     main.url = "/"
+    main.allowed = "admins"
     api.url = "/api"
     api.allowed = "visitors"
 
