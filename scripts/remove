@@ -19,6 +19,9 @@ fi
 
 ynh_config_remove_systemd
 
+# Remove YunoHost hook
+ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
+
 #=================================================
 # END OF SCRIPT
 #=================================================
