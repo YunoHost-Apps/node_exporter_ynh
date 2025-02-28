@@ -1,5 +1,6 @@
 [Unit]
 Description=Prometheus Node Exporter component
+Documentation=https://github.com/prometheus/node_exporter
 Wants=network-online.target
 After=network-online.target
 
