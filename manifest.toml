@@ -37,7 +37,7 @@ ram.runtime = "9M"
     [install.path]
     type = "path"
     default = "/node_exporter"
-    
+
     [install.init_main_permission]
     type = "group"
     default = "visitors"
@@ -67,7 +67,8 @@ ram.runtime = "9M"
     main.url = "/"
     api.url = "/api"
     api.allowed = "visitors"
+    api.show_tile = false
+    api.auth_header = false
 
     [resources.ports]
-    main.default = 9100
     main.exposed = "TCP"

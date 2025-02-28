@@ -8,7 +8,7 @@ Type=simple
 User=__APP__
 Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/node_exporter --web.telemetry-path="/__PATH__/metrics"
+ExecStart=__INSTALL_DIR__/node_exporter --web.telemetry-path="/__PATH__/metrics" --web.listen-address=:__PORT__
 
 ### Depending on specificities of your service/app, you may need to tweak these
 ### .. but this should be a good baseline
