@@ -35,7 +35,7 @@ ram.runtime = "9M"
     type = "domain"
 
     [install.ipv4_promotheus_server]
-    ask = "Promotheus Server IPv4 Address/subnet (example: 89.234.140.172/24)"
+    ask = "Promotheus Server IPv4 Address/subnet (example: 89.234.56.78/24)"
     type = "string"
 
 [resources]
