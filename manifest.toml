@@ -31,12 +31,12 @@ ram.build = "75M"
 ram.runtime = "9M"
 
 [install]
-    #[install.domain]
-    #type = "domain"
+    [install.domain]
+    type = "domain"
 
-    #[install.init_main_permission]
-    #type = "group"
-    #default = "visitors"
+    [install.init_main_permission]
+    type = "group"
+    default = "visitors"
 
 [resources]
 
