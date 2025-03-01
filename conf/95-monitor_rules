@@ -1,4 +1,4 @@
 #!/bin/bash
 # Add promotheus accept rules
-iptables -w -A INPUT -s __IPv4_PROMOTHEUS_SERVER__ -p tcp -m tcp --dport __PORT__ -j ACCEPT
+iptables -w -A INPUT -s __IPV4_PROMOTHEUS_SERVER__ -p tcp -m tcp --dport __PORT__ -j ACCEPT
 exit 0
