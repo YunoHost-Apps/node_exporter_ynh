@@ -69,7 +69,7 @@ ram.runtime = "9M"
     api.allowed = ["visitors", "admins"]
     api.show_tile = false
     api.protected = true
-    api.auth_header = false
+    api.auth_header = true
 
     [resources.ports]
     main.default = 9100
