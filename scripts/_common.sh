@@ -4,4 +4,4 @@
 # COMMON VARIABLES
 #=================================================
 
-IP_YUNOHOST_SERVER="$(curl -s https://ip.yunohost.org/)"
+ip_yunohost_server="$(curl -s https://ip.yunohost.org/)"
