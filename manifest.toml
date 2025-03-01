@@ -37,7 +37,9 @@ ram.runtime = "9M"
     [install.ipv4_promotheus_server]
     ask.en = "Promotheus Server IPv4 Address"
     ask.fr = "Adresse IPv4 du serveur Promotheus"
-    type = "string"
+    type = "string"    
+    help.en = "If your Promotheus server is public add a CIDR `/32` (exemple: IPv4_ADDRESS/32)"
+    help.fr = "Si votre serveur Promotheus est public, ajoutez un CIDR `/32` (exemple IPv4_ADDRESS/32)"
 
 [resources]
 
