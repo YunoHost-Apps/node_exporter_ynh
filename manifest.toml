@@ -68,8 +68,7 @@ ram.runtime = "9M"
     api.url = "/metrics"
     api.allowed = ["visitors", "admins"]
     api.show_tile = false
-    api.protected = true
-    api.auth_header = true
+    api.auth_header = false
 
     [resources.ports]
     main.default = 9100
