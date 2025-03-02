@@ -9,8 +9,8 @@ source /usr/share/yunohost/helpers
 ynh_script_progression "Adding $app's configuration files..."
 
 mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
-ynh_config_add --template="95-monitor_rules" --destination="/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
-chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
+ynh_config_add --template="80-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

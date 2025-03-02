@@ -26,7 +26,7 @@ systemctl enable "$app.service" --quiet
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
 
 # Restaure YunoHost hook
-ynh_restore "/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
+ynh_restore "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 
 #=================================================
 # RELOAD NGINX AND PHP-FPM OR THE APP SERVICE

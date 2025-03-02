@@ -27,7 +27,8 @@ ynh_setup_source --dest_dir="$install_dir" --full_replace
 ynh_script_progression "Updating $app's configuration files..."
 
 mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
-ynh_config_add --template="95-monitor_rules" --destination="/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
+ynh_config_add --template="80-monitor_rules" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-monitor_rules"
+chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS

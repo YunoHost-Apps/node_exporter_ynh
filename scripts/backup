@@ -23,7 +23,7 @@ ynh_backup "$install_dir"
 # Backup the systemd service unit
 ynh_backup "/etc/systemd/system/$app.service"
 
-ynh_backup "/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
+ynh_backup "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 
 #=================================================
 # END OF SCRIPT
