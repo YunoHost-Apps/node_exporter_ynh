@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# IMPORT GENERIC HELPERS and load common variables and helpers
-#source /usr/share/yunohost/helpers
+# IMPORT load common variables
 #source ${pwd}/../../apps/${app}/scripts/_common.sh
 
 # Add only promotheus server accept rules
