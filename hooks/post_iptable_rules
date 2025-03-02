@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Add only promotheus server accept rules
-line_port=$(iptables -xvnL --line-numbers |grep $port |cut -d' ' -f1)
-
-iptables -R INPUT $line_port -s $ip_prometheus_server -p tcp -m tcp --dport $port -j ACCEPT
-exit 0
-
-iptables -save
