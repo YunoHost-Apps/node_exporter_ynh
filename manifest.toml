@@ -72,7 +72,5 @@ ram.runtime = "9M"
     api.auth_header = false
 
     [resources.ports]
-
-    [resources.ports]
     main.default = 9100
     main.exposed = "TCP"
