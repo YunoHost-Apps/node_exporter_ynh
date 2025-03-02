@@ -13,15 +13,6 @@ ynh_setup_source --dest_dir="$install_dir"
 chmod +x "$install_dir/node_exporter"
 
 #=================================================
-# APP INITIAL CONFIGURATION
-#=================================================
-ynh_script_progression "Adding $app's configuration files..."
-
-mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
-ynh_config_add --template="95-monitor_rules" --destination="/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
-chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
-
-#=================================================
 # SYSTEM CONFIGURATION
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."
@@ -30,6 +21,15 @@ ynh_script_progression "Adding system configurations related to $app..."
 ynh_config_add_systemd
 
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
+
+#=================================================
+# APP ADD CONFIGURATION
+#=================================================
+ynh_script_progression "Adding $app's configuration files..."
+
+mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
+ynh_config_add --template="95-monitor_rules" --destination="/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
+chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/95-monitor_rules"
 
 #=================================================
 # START SYSTEMD SERVICE
