@@ -34,6 +34,13 @@ ram.runtime = "9M"
     [install.domain]
     type = "domain"
 
+    [install.ip_prometheus_server]
+    ask.en = "Promotheus external Server IPv4 Address"
+    ask.fr = "Adresse IPv4 du serveur externe Promotheus"
+    type = "string"
+    help.en = "If your Prometheus server is public add a CIDR `/32` (exemple: IPv4_ADDRESS/32)"
+    help.fr = "Si votre serveur Prometheus est public, ajoutez un CIDR `/32` (exemple IPv4_ADDRESS/32)"
+
 [resources]
 
     [resources.sources]
@@ -45,7 +52,7 @@ ram.runtime = "9M"
     arm64.sha256 = "5314fae1efff19abf807cfc8bd7dadbd47a35565c1043c236ffb0689dc15ef4f"
     armhf.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-armv7.tar.gz"
     armhf.sha256 = "27ff7b105fd4cfc58c2762a6387d93e62eb55473cb5111eb5feb7086c60ef05f"
-    
+
     autoupdate.strategy = "latest_github_release"
     autoupdate.asset.amd64 = ".*linux-amd64.tar.gz"
     autoupdate.asset.armhf = ".*linux-armv7.tar.gz"
@@ -58,8 +65,11 @@ ram.runtime = "9M"
     [resources.permissions]
     main.url = "/"
     main.allowed = "admins"
-    api.url = "/api"
-    api.allowed = "visitors"
+    main.auth_header = false
+    api.url = "/metrics"
+    api.allowed = ["visitors", "admins"]
+    api.show_tile = false
+    api.auth_header = false
 
     [resources.ports]
     main.default = 9100
