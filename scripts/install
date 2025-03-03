@@ -45,6 +45,7 @@ ynh_systemctl --service="$app" --action="start"
 ynh_script_progression "Reloading firewall..."
 
 yunohost firewall reload --debug
+yunohost firewall disallow TCP "$port" -6
 
 #=================================================
 # END OF SCRIPT
