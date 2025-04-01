@@ -21,7 +21,7 @@ EZ editatu eskuz.
 Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
 
 
-**Paketatutako bertsioa:** 1.9.0~ynh1
+**Paketatutako bertsioa:** 1.9.1~ynh1
 ## Dokumentazioa eta baliabideak
 
 - Aplikazioaren webgune ofiziala: <https://prometheus.io/docs/guides/node-exporter/>
@@ -34,7 +34,7 @@ Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written
 
 Bidali `pull request`a [`testing` abarrera](https://github.com/YunoHost-Apps/node_exporter_ynh/tree/testing).
 
-`testing` abarra probatzeko, ondorengoa egin:
+`testing` abarra probatzeko, honakoa egin:
 
 ```bash
 sudo yunohost app install https://github.com/YunoHost-Apps/node_exporter_ynh/tree/testing --debug

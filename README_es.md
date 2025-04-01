@@ -3,7 +3,7 @@ Este archivo README esta generado automaticamente<https://github.com/YunoHost/ap
 No se debe editar a mano.
 -->
 
-# Node Exporter para Yunohost
+# Node Exporter para YunoHost
 
 [![Nivel de integración](https://apps.yunohost.org/badge/integration/node_exporter)](https://ci-apps.yunohost.org/ci/apps/node_exporter/)
 ![Estado funcional](https://apps.yunohost.org/badge/state/node_exporter)
@@ -21,7 +21,7 @@ No se debe editar a mano.
 Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
 
 
-**Versión actual:** 1.9.0~ynh1
+**Versión actual:** 1.9.1~ynh1
 ## Documentaciones y recursos
 
 - Sitio web oficial: <https://prometheus.io/docs/guides/node-exporter/>
