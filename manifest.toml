@@ -7,7 +7,7 @@ name = "Node Exporter"
 description.en = "Monitor YunoHost with prometheus"
 description.fr = "Surveiller YunoHost avec prometheus"
 
-version = "1.9.0~ynh1"
+version = "1.9.1~ynh1"
 
 maintainers = []
 
@@ -39,12 +39,12 @@ ram.runtime = "9M"
     [resources.sources]
 
     [resources.sources.main]
-    amd64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz"
-    amd64.sha256 = "e7b65ea30eec77180487d518081d3dcb121b975f6d95f1866dfb9156c5b24075"
-    arm64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-arm64.tar.gz"
-    arm64.sha256 = "5314fae1efff19abf807cfc8bd7dadbd47a35565c1043c236ffb0689dc15ef4f"
-    armhf.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-armv7.tar.gz"
-    armhf.sha256 = "27ff7b105fd4cfc58c2762a6387d93e62eb55473cb5111eb5feb7086c60ef05f"
+    amd64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz"
+    amd64.sha256 = "becb950ee80daa8ae7331d77966d94a611af79ad0d3307380907e0ec08f5b4e8"
+    arm64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-arm64.tar.gz"
+    arm64.sha256 = "848f139986f63232ced83babe3cad1679efdbb26c694737edc1f4fbd27b96203"
+    armhf.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-armv7.tar.gz"
+    armhf.sha256 = "f04c95c9c474516b06ab10e34a663992ccad4c9185596e404f02790ec23d83d9"
     
     autoupdate.strategy = "latest_github_release"
     autoupdate.asset.amd64 = ".*linux-amd64.tar.gz"
