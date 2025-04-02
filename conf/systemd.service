@@ -1,5 +1,6 @@
 [Unit]
 Description=Node Exporter
+Documentation=https://github.com/prometheus/node_exporter
 Wants=network-online.target
 After=network-online.target
 
@@ -10,8 +11,6 @@ Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
 ExecStart=__INSTALL_DIR__/node_exporter
 
-### Depending on specificities of your service/app, you may need to tweak these
-### .. but this should be a good baseline
 # Sandboxing options to harden security
 # Details for these options: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
 NoNewPrivileges=yes
