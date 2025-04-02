@@ -21,7 +21,7 @@ NON debe editarse manualmente.
 Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
 
 
-**Versión proporcionada:** 1.9.0~ynh1
+**Versión proporcionada:** 1.9.1~ynh1
 ## Documentación e recursos
 
 - Web oficial da app: <https://prometheus.io/docs/guides/node-exporter/>

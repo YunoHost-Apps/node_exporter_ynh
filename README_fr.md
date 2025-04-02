@@ -20,7 +20,8 @@ Il NE doit PAS être modifié à la main.
 
 Exportateur Prometheus pour les métriques matérielles et OS exposées par les noyaux *NIX, écrit en Go avec des collecteurs de métriques enfichables.
 
-**Version incluse :** 1.9.0~ynh1
+
+**Version incluse :** 1.9.1~ynh1
 ## Documentations et ressources
 
 - Site officiel de l’app : <https://prometheus.io/docs/guides/node-exporter/>
