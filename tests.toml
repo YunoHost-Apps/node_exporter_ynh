@@ -8,4 +8,12 @@ test_format = 1.0
     # Tests to run
     # ------------
 
-    args.ipv4_promotheus_server="89.234.140.172/24"
+    # -------------------------------
+    # Default args to use for install
+    # -------------------------------
+
+    # -------------------------------
+    # Commits to test upgrade from
+    # -------------------------------
+
+    test_upgrade_from.3306f9d97ee174545b7bfa7a0aee25aedbf572e9.name = "Upgrade from 1.9.0~ynh1"
