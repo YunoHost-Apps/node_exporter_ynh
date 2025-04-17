@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
 source _common.sh
 source /usr/share/yunohost/helpers
 
@@ -17,6 +21,7 @@ chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 #=================================================
 ynh_script_progression "Setting up source files..."
 
+# Download, check integrity, uncompress and patch the source from manifest.toml
 ynh_setup_source --dest_dir="$install_dir"
 
 chmod +x "$install_dir/node_exporter"
@@ -28,7 +33,6 @@ ynh_script_progression "Adding system configurations related to $app..."
 
 # Create a dedicated systemd config
 ynh_config_add_systemd
-
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
 
 #=================================================
@@ -54,4 +58,3 @@ yunohost diagnosis ignore --filter ports port=$port
 #=================================================
 
 ynh_script_progression "Installation of $app completed"
-
