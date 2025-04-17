@@ -1,21 +1,19 @@
 [Unit]
-Description=Prometheus Node Exporter component
+Description=Node Exporter
 Documentation=https://github.com/prometheus/node_exporter
 Wants=network-online.target
 After=network-online.target
 
 [Service]
 Type=simple
-#User=__APP__
-#Group=__APP__
+User=__APP__
+Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
 ExecStart=__INSTALL_DIR__/node_exporter --web.listen-address __IP_YUNOHOST_SERVER__:__PORT__
 Restart=always
 RestartSec=1
 StartLimitInterval=0
 
-### Depending on specificities of your service/app, you may need to tweak these
-### .. but this should be a good baseline
 # Sandboxing options to harden security
 # Details for these options: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
 NoNewPrivileges=yes
