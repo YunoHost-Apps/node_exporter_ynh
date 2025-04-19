@@ -20,6 +20,8 @@ Monitor YunoHost with prometheus
 
 ## 📦 Developer info
 
+[![Automatic tests level](https://apps.yunohost.org/badge/cilevel/node_exporter)](https://ci-apps.yunohost.org/ci/apps/node_exporter/)
+
 🛠️ Upstream Node Exporter repository: <https://github.com/prometheus/node_exporter>
 
 Pull request are welcome and should target the [`testing` branch](https://github.com/YunoHost-Apps/node_exporter_ynh/tree/testing).

@@ -8,6 +8,15 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# APP INITIAL CONFIGURATION
+#=================================================
+ynh_script_progression "Adding $app's configuration files..."
+
+mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
+ynh_config_add --template="80-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Setting up source files..."
@@ -33,6 +42,16 @@ ynh_script_progression "Starting $app's systemd service..."
 
 # Start a systemd service
 ynh_systemctl --service="$app" --action="start"
+
+#=================================================
+# RELOAD FIREWALL
+#=================================================
+ynh_script_progression "Reloading firewall..."
+
+yunohost firewall reload --debug
+
+# ignore diagnosis port $port unreacheable for IPv6
+yunohost diagnosis ignore --filter ports port=$port
 
 #=================================================
 # END OF SCRIPT

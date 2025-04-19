@@ -24,12 +24,25 @@ ynh_restore "/etc/systemd/system/$app.service"
 systemctl enable "$app.service" --quiet
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
 
+# Restaure YunoHost hook
+ynh_restore "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+
 #=================================================
 # RELOAD NGINX AND PHP-FPM OR THE APP SERVICE
 #=================================================
 ynh_script_progression "Reloading NGINX web server and $app's service..."
 
 ynh_systemctl --service="$app" --action="start"
+
+#=================================================
+# RELOAD FIREWALL
+#=================================================
+ynh_script_progression "Reloading firewall..."
+
+yunohost firewall reload --debug
+
+# ignore diagnosis port $port unreacheable for IPv6
+yunohost diagnosis ignore --filter ports port=$port
 
 #=================================================
 # END OF SCRIPT

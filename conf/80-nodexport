@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# IMPORT load common variables
+#source ${pwd}/../../apps/${app}/scripts/_common.sh
+
+# Add only promotheus server accept rules
+iptables -R INPUT __LINE_PORT__ -s __IP_PROMETHEUS_SERVER__ -p tcp -m tcp --dport __PORT__ -j ACCEPT
+ip6tables -R INPUT __LINE_PORT6__ -p tcp --dport __PORT__ -j DROP
