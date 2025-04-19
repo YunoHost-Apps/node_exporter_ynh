@@ -7,7 +7,7 @@ name = "Node Exporter"
 description.en = "Monitor YunoHost with prometheus"
 description.fr = "Surveiller YunoHost avec prometheus"
 
-version = "1.9.1~ynh1"
+version = "1.9.2~ynh1"
 
 maintainers = []
 
@@ -59,7 +59,7 @@ ram.runtime = "9M"
     [resources.permissions]
     main.url = "/"
     main.allowed = "admins"
-    api.url = "/api"
+    api.url = "/metrics"
     api.allowed = "visitors"
 
     [resources.ports]
