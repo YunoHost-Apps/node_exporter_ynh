@@ -12,9 +12,11 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression "Adding $app's configuration files..."
 
+if [ "$ip_prometheus_server" != "127.0.0.1"  ] then;
 mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
 ynh_config_add --template="80-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+fi
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -46,12 +48,14 @@ ynh_systemctl --service="$app" --action="start"
 #=================================================
 # RELOAD FIREWALL
 #=================================================
+
+if [ "$ip_prometheus_server" != "127.0.0.1"  ] then;
 ynh_script_progression "Reloading firewall..."
 
 yunohost firewall reload --debug
-
 # ignore diagnosis port $port unreacheable for IPv6
 yunohost diagnosis ignore --filter ports port=$port
+fi
 
 #=================================================
 # END OF SCRIPT

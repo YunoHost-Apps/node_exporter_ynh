@@ -18,8 +18,10 @@ if ynh_hide_warnings yunohost service status "$app" >/dev/null; then
 fi
 ynh_config_remove_systemd
 
+if [ "$ip_prometheus_server" != "127.0.0.1"  ] then;
 # Remove YunoHost hook
 ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+fi
 
 #=================================================
 # END OF SCRIPT

@@ -36,11 +36,12 @@ ram.runtime = "9M"
     type = "domain"
 
     [install.ip_prometheus_server]
-    ask.en = "Promotheus external Server IPv4 Address"
+    ask.en = "Promotheus Server IPv4 Address"
     ask.fr = "Adresse IPv4 du serveur externe Promotheus"
     type = "string"
-    help.en = "If your Prometheus server is public add a CIDR `/32` (exemple: IPv4_ADDRESS/32)"
-    help.fr = "Si votre serveur Prometheus est public, ajoutez un CIDR `/32` (exemple IPv4_ADDRESS/32)"
+    default= "127.0.0.1"
+    help.en = "If your Prometheus server in on the same server choose 127.0.0.1, if your Prometheus server is external with public address add after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
+    help.fr = "Si votre serveur Promotheus est local choisissez `127.0.0.1`, si votre serveur Prometheus est externe avec une adresse publique, ajoutez un CIDR `/32` ( <IPv4_ADDRESS>/32 )"
 
 [resources]
 

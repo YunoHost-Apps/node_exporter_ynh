@@ -1,0 +1,32 @@
+#!/bin/bash
+
+source _common.sh
+source /usr/share/yunohost/helpers
+
+set__enable_external_promotheus() {
+    if [ "$enable_external_promotheus" -eq "0" ]; then
+       ynh_app_setting_set --app="$app" --key=ip_prometheus_server --value="127.0.0.1"
+
+       if [ -f "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport" ] then;
+		# Remove YunoHost hook
+		ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+       fi
+
+       yunohost firewall reload --debug
+       yunohost diagnosis unignore --filter ports port=$port
+
+       ynh_print_info "Node exporter now listen local server Prometheus"
+
+    elif [ "$enable_notify_push" -eq "1" ]; then
+        hook_extra_conf_dir="/etc/yunohost/hooks.d/post_iptable_rules/"
+        mkdir -p "$hook_extra_conf_dir"
+        ynh_config_add --template="80-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+        chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+
+        ynh_systemctl --service="node_exporter" --action=reload
+        yunohost firewall reload --debug
+		# ignore diagnosis port $port unreacheable for IPv6
+		yunohost diagnosis ignore --filter ports port=$port
+    fi
+    ynh_app_setting_set --key= --value="$enable_external_promotheus"
+}
