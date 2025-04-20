@@ -10,5 +10,5 @@ version = "1.0"
         default= "127.0.0.1"
         help.en = "If your Prometheus server in on the same server let 127.0.0.1, if your Prometheus server is external with public address add after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
         help.fr = "Si votre serveur Promotheus est local laissez `127.0.0.1`, si votre serveur Prometheus est externe avec une adresse publique, ajoutez un CIDR `/32` ( <IPv4_ADDRESS>/32 )"
-        bind = "IP_PROMETHEUS_SERVER:/etc/system/sytemd/node_exporter.service"
+#        bind = "IP_PROMETHEUS_SERVER:/etc/system/sytemd/node_exporter.service"
 
