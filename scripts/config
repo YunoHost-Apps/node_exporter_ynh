@@ -17,7 +17,7 @@ set__enable_external_promotheus() {
 
        ynh_print_info "Node exporter now listen local server Prometheus"
 
-    elif [ "$enable_notify_push" -eq "1" ]; then
+    elif [ "$enable_external_promotheus" -eq "1" ]; then
         hook_extra_conf_dir="/etc/yunohost/hooks.d/post_iptable_rules/"
         mkdir -p "$hook_extra_conf_dir"
         ynh_config_add --template="80-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
