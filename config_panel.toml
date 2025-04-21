@@ -12,6 +12,6 @@ version = "1.0"
 
         [main.ip_prometheus.ip_yunohost_server]
         ask = "Is your Server Promotheus on the same server ?"
-        type = "bolean"
+        type = "boolean"
         help= " yes = your Prometheus server Iin on the same local server let default 127.0.0.1, no = Prometheus server is external"
         bind = "IP_YUNOHOST_SERVER:/etc/system/systemd/node-exporter.service"
