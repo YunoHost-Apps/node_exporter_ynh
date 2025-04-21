@@ -48,10 +48,11 @@ chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 #=================================================
 # RELOAD FIREWALL
 #=================================================
+ynh_script_progression "Reload firewall..."
 
 yunohost firewall reload --debug
 # ignore diagnosis port $port unreacheable for IPv6
-yunohost diagnosis ignore --filter ports port=$port
+#yunohost diagnosis ignore --filter ports port=$port
 
 #=================================================
 # END OF SCRIPT
