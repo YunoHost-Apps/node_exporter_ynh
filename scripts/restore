@@ -25,7 +25,7 @@ systemctl enable "$app.service" --quiet
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
 
 # Restore YunoHost hook if needed
-if [ "$ip_prometheus_server" != "127.0.0.1"  ] then;
+if [ "$ip_prometheus_server" != "127.0.0.1"  ]; then
 ynh_restore "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 fi
 

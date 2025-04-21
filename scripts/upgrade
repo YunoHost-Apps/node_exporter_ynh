@@ -51,7 +51,7 @@ ynh_systemctl --service="$app" --action="start"
 #=================================================
 ynh_script_progression "Reloading firewall..."
 
-if [ "$ip_prometheus_server" != "127.0.0.1"  ] then;
+if [ "$ip_prometheus_server" != "127.0.0.1"  ]; then
 yunohost firewall reload --debug
 fi
 
