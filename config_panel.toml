@@ -1,17 +1,18 @@
 version = "1.0"
 
     [main.ip_prometheus]
-    name.en = "IP Prometheus Server externe ?"
-    name.fr = "IP du serveur Prometheus externe ?"
+    name = "external or local IP Prometheus Server ?"
 
         [main.ip_prometheus.ip_prometheus_server]
-        ask = "IP du serveur Prometheus"
+        ask = "IP Server Prometheus"
         type = "string"
         default= "127.0.0.1"
-        help.en = "If your Prometheus server in on the same server let 127.0.0.1, if your Prometheus server is external with public address add after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
-        help.fr = "Si votre serveur Promotheus est local laissez `127.0.0.1`, si votre serveur Prometheus est externe avec une adresse publique, ajoutez un CIDR `/32` ( <IPv4_ADDRESS>/32 )"
+        help = "If your Prometheus server in on the same local server let default 127.0.0.1, if your Prometheus server is external with public address add after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
         bind = "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 
         [main.ip_prometheus.ip_yunohost_server]
-        type = "string"
+        ask = "IP local server"
+        type = "select"
+        choices = [ "127.0.0.1" , "$(curl -s https://ip.yunohost.org/)" ]
+        help= "if your Prometheus server in on the same local server let default 127.0.0.1, if your Prometheus server is external you need choose the Yunohost IPv4"
         bind = ":/etc/system/systemd/node-exporter.service"

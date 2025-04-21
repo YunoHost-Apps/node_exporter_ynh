@@ -15,7 +15,7 @@ set__ip_prometheus_server() {
     ynh_app_setting_set --key= --value="$ip_prometheus_server"
 }
 
-set__ip_prometheus_server() {
+set__ip_yunohost_server() {
     if [ "$ip_prometheus_server" == "127.0.0.1" ]
     then
        # value IP local to listen for service
