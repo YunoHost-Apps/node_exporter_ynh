@@ -32,17 +32,13 @@ ynh_app_config_apply() {
 
     if [ "${changed[external]}" == "true" ] && [ $external -eq 1 ]
     then
-        ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="$(curl -s https://ip.yunohost.org/)"
+#        ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="$(curl -s https://ip.yunohost.org/)"
         ynh_systemctl --service="node_exporter" --action=restart
-
-        if [ ! "$ip_prometheus_server" == "127.0.0.1" ]
-        then
-            yunohost firewall reload --debug
-        fi
+        yunohost firewall reload --debug
     elif [ "${changed[external]}" == "true" ] && [ $external -eq 0 ]
     then
-        ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="127.0.0.1"
-        ynh_app_setting_set --app="$app" --key="ip_promotheus_server" value="127.0.0.1"
+#        ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="127.0.0.1"
+#        ynh_app_setting_set --app="$app" --key="ip_promotheus_server" value="127.0.0.1"
         ynh_systemctl --service="node_exporter" --action=restart
         yunohost firewall reload --debug
     fi
