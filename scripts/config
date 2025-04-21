@@ -3,6 +3,7 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+hook_extra_conf_dir="/etc/yunohost/hooks.d/post_iptable_rules"
 set__ip_prometheus_server() {
     if [ "$ip_prometheus_server" == "127.0.0.1" ]
     then
@@ -10,22 +11,12 @@ set__ip_prometheus_server() {
        ynh_app_setting_set_default --app="$app" --key=ip_yunohost_server value="127.0.0.1"
        ynh_systemctl --service="node_exporter" --action=reload
 
-       if [ -f "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport" ] then;
-		# Remove YunoHost hook
-		ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
-       fi
-
        yunohost diagnosis unignore --filter ports port=$port
        yunohost firewall reload --debug
 
        ynh_print_info "Node exporter now listen local server Prometheus"
 
     else
-        hook_extra_conf_dir="/etc/yunohost/hooks.d/post_iptable_rules"
-        mkdir -p "$hook_extra_conf_dir"
-        ynh_config_add --template="80-nodexport" --destination="$hook_extra_conf_dir/80-nodexport"
-        chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
-
         # value IP server external to listen for service
         ynh_app_setting_set_default --app="$app" --key=ip_yunohost_server value="$(curl -s https://ip.yunohost.org/)"
         ynh_systemctl --service="node_exporter" --action=reload
