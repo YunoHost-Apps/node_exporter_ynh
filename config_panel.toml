@@ -1,17 +1,19 @@
 version = "1.0"
 
-    [main.ip_prometheus]
+[main]
+name.en = "Node Exporter configuration"
+
+    [main.prometheus]
     name = "External or local Prometheus Server ?"
 
-        [main.ip_prometheus.ip_prometheus_server]
-        ask = "IP Server Prometheus"
-        type = "string"
-        default= "127.0.0.1"
-        help = "If your Prometheus server in on the same local server let default 127.0.0.1, if your Prometheus server is external with public address add after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
-        bind = "IP_PROMOTHEUS_SERVER:/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
-
-        [main.ip_prometheus.ip_yunohost_server]
+        [main.prometheus.ip_yunohost_server]
         ask = "Is your Server Promotheus on external server ?"
         type = "boolean"
         help= " No = your Prometheus server in on the same local server, Yes = Prometheus server is external"
         bind = "IP_YUNOHOST_SERVER:/etc/system/systemd/node-exporter.service"
+
+        [main.prometheus.ip_prometheus_server]
+        ask = "IP Server Prometheus"
+        type = "string"
+        help = "If your Prometheus server in on the same local server let default 127.0.0.1, if your Prometheus server is external with public address add after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
+        bind = "IP_PROMOTHEUS_SERVER:/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
