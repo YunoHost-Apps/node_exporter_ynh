@@ -35,7 +35,7 @@ ram.runtime = "9M"
     [install.domain]
     type = "domain"
 
-    [install.ip_server]
+    [install.external]
     ask.en = "Is your Server Promotheus on external server ?"
     type = "boolean"
     default = false
@@ -46,7 +46,7 @@ ram.runtime = "9M"
     default = "127.0.0.1"
     help = "by default with local Prometheus the node listen `127.0.0.1`, if external prometheus server enabled, must be replaced by the IP server = `$(curl -s https://ip.yunohost.org/)`"
 
-    [install.ip_prometheus]
+    [install.ip_prometheus_server]
     ask = "IP Server Prometheus"
     type = "string"
     default = "127.0.0.1"
