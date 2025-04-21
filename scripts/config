@@ -36,3 +36,8 @@ set__ip_prometheus_server() {
     fi
     ynh_app_setting_set --key= --value="$ip_prometheus_server"
 }
+
+#=================================================
+# SELECT THE ACTION FOLLOWING THE GIVEN ARGUMENT
+#=================================================
+ynh_app_config_run "$1"
