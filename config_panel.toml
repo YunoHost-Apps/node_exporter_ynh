@@ -11,8 +11,7 @@ version = "1.0"
         bind = "IP_PROMOTHEUS_SERVER:/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 
         [main.ip_prometheus.ip_yunohost_server]
-        ask = "IP local server"
-        type = "select"
-        choices = [ "127.0.0.1" , "$(curl -s https://ip.yunohost.org/)" ]
-        help= "if your Prometheus server in on the same local server let default 127.0.0.1, if your Prometheus server is external you need choose the Yunohost IPv4"
+        ask = "Is your Server Promotheus on the same server ?"
+        type = "bolean"
+        help= " yes = your Prometheus server Iin on the same local server let default 127.0.0.1, no = Prometheus server is external"
         bind = "IP_YUNOHOST_SERVER:/etc/system/systemd/node-exporter.service"
