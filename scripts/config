@@ -17,12 +17,12 @@ set__ip_prometheus_server() {
 }
 
 set__ip_yunohost_server() {
-    if [ "$ip_yunohost_server" eq "O" ]
+    if [ "$ip_yunohost_server" eq "0" ]
     then
        # value IP local to listen for service
        ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="127.0.0.1"
        ynh_systemctl --service="node_exporter" --action=restart
-    else
+    elif [ "$ip_yunohost_server" eq "1" ]
         # value IP server external to listen for service
         ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="$(curl -s https://ip.yunohost.org/)"
         ynh_systemctl --service="node_exporter" --action=restart
@@ -30,4 +30,4 @@ set__ip_yunohost_server() {
      ynh_app_setting_set --key=ip_yunohost_server --value="$ip_yunohost_server"
 }
 
-#ynh_app_config_run $1
+ynh_app_config_run $1
