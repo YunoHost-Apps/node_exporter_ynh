@@ -11,3 +11,7 @@ version = "1.0"
         help.en = "If your Prometheus server in on the same server let 127.0.0.1, if your Prometheus server is external with public address add after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
         help.fr = "Si votre serveur Promotheus est local laissez `127.0.0.1`, si votre serveur Prometheus est externe avec une adresse publique, ajoutez un CIDR `/32` ( <IPv4_ADDRESS>/32 )"
         bind = "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+
+        [main.ip_prometheus.ip_yunohost_server]
+        type = "string"
+        bind = ":/etc/system/systemd/node-exporter.service"

@@ -7,20 +7,26 @@ hook_extra_conf_dir="/etc/yunohost/hooks.d/post_iptable_rules"
 set__ip_prometheus_server() {
     if [ "$ip_prometheus_server" == "127.0.0.1" ]
     then
-       # value IP local to listen for service
-       ynh_app_setting_set --app="$app" --key=ip_yunohost_server value="127.0.0.1"
-       ynh_systemctl --service="node_exporter" --action=reload
-
        yunohost firewall reload --debug
        ynh_print_info "Node exporter now listen local server Prometheus"
     else
-        # value IP server external to listen for service
-        ynh_app_setting_set --app="$app" --key=ip_yunohost_server value="$(curl -s https://ip.yunohost.org/)"
-        ynh_systemctl --service="node_exporter" --action=reload
-
         yunohost firewall reload --debug
     fi
     ynh_app_setting_set --key= --value="$ip_prometheus_server"
+}
+
+set__ip_prometheus_server() {
+    if [ "$ip_prometheus_server" == "127.0.0.1" ]
+    then
+       # value IP local to listen for service
+       ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="127.0.0.1"
+       ynh_systemctl --service="node_exporter" --action=reload
+    else
+        # value IP server external to listen for service
+        ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="$(curl -s https://ip.yunohost.org/)"
+        ynh_systemctl --service="node_exporter" --action=reload
+    fi
+     ynh_app_setting_set --key= --value="$ip_prometheus_server"
 }
 
 #=================================================
