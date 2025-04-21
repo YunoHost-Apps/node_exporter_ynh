@@ -7,17 +7,30 @@ ynh_abort_if_errors
 
 ynh_app_config_validate() {
     _ynh_app_config_validate
+    if [ "${changed[ip_external]}" == "true" ] && [ $ip_external -eq 1 ] && [ "$ip_yunohost_server" == "127.0.0.1" ]
+         ynh_die --message="You need to change the IP listen by Promotheus by the IP server = `$(curl -s https://ip.yunohost.org/)`"
+    fi
 
-    if [ "${changed[ip_yunohost_server]}" == "true" ] && [ $ip_yunohost_server -eq 0 ] && [ "$ip_prometheus_server" == "127.0.0.1" ]
+    if [ "${changed[ip_external]}" == "true" ] && [ $ip_external -eq 1 ] && [ "$ip_prometheus_server" == "127.0.0.1" ]
     then
         ynh_die --message="You need to choose an external IP for Promotheus"
+    fi
+
+    if [ "${changed[ip_external]}" == "true" ] && [ $ip_external -eq 0 ] && [ ! "$ip_yunohost_server" == "127.0.0.1" ]
+    then
+        ynh_die --message="You need to choose `127.0.0.1` for IP for Promotheus"
+    fi
+
+    if [ "${changed[ip_external]}" == "true" ] && [ $ip_external -eq 0 ] && [ ! "$ip_prometheus_server" == "127.0.0.1" ]
+    then
+        ynh_die --message="You need to choose `127.0.0.1` to listen local Promotheus"
     fi
 }
 
 ynh_app_config_apply() {
     _ynh_app_config_apply
 
-    if [ "${changed[ip_yunohost_server]}" == "true" ] && [ $ip_yunohost_server -eq 1 ]
+    if [ "${changed[ip_external]}" == "true" ] && [ $ip_external -eq 1 ]
     then
         ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="$(curl -s https://ip.yunohost.org/)"
         ynh_systemctl --service="node_exporter" --action=restart
@@ -26,11 +39,17 @@ ynh_app_config_apply() {
         then
             yunohost firewall reload --debug
         fi
-
-    elif [ "${changed[ip_yunohost_server]}" == "true" ] && [ $ip_yunohost_server -eq 0 ]
+    elif [ "${changed[ip_external]}" == "true" ] && [ $ip_external -eq 0 ]
     then
         ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="127.0.0.1"
+        ynh_app_setting_set --app="$app" --key="ip_promotheus_server" value="127.0.0.1"
+        ynh_systemctl --service="node_exporter" --action=restart
         yunohost firewall reload --debug
+    fi
+
+    if [ "${changed[ip_yunohost_server]}" == "true" ] && [ ! "$ip_yunohost_server" == "127.0.0.1" ]
+    then
+        ynh_systemctl --service="node_exporter" --action=restart
     fi
 
     if [ "${changed[ip_prometheus_server]}" == "true" ] && [ ! "$ip_prometheus_server" == "127.0.0.1" ]

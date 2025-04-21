@@ -9,8 +9,10 @@ line_port=$(iptables -xvnL --line-numbers |grep $port |cut -d' ' -f1) || true
 line_port6=$(ip6tables -xvnL --line-numbers |grep $port |cut -d' ' -f1) || true
 
 
-if [ "$ip_prometheus_server" == "127.0.0.1" ]; then
+if [ "$external" eq 0 ]; then
 	ip_yunohost_server="127.0.0.1"
-else
+fi
+
+if [ "$external" eq 1 ]; then
 	ip_yunohost_server="$(curl -s https://ip.yunohost.org/)"
 fi

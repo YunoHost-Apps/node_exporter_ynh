@@ -35,6 +35,23 @@ ram.runtime = "9M"
     [install.domain]
     type = "domain"
 
+    [install.ip_server]
+    ask.en = "Is your Server Promotheus on external server ?"
+    type = "boolean"
+    default = false
+
+    [install.ip_yunohost_server]
+    ask = "IP listen by Promotheus"
+    type = "string"
+    default = "127.0.0.1"
+    help = "by default with local Prometheus the node listen `127.0.0.1`, if external prometheus server enabled, must be replaced by the IP server = `$(curl -s https://ip.yunohost.org/)`"
+
+    [install.ip_prometheus]
+    ask = "IP Server Prometheus"
+    type = "string"
+    default = "127.0.0.1"
+    help = "Your Prometheus server IP, by default local `127.0.0.1`. If external Prometheus server enabled, add the Promrtheus IPv4 after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
+
 [resources]
 
     [resources.sources]
@@ -46,7 +63,7 @@ ram.runtime = "9M"
     arm64.sha256 = "848f139986f63232ced83babe3cad1679efdbb26c694737edc1f4fbd27b96203"
     armhf.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-armv7.tar.gz"
     armhf.sha256 = "f04c95c9c474516b06ab10e34a663992ccad4c9185596e404f02790ec23d83d9"
-    
+
     autoupdate.strategy = "latest_github_release"
     autoupdate.asset.amd64 = ".*linux-amd64.tar.gz"
     autoupdate.asset.armhf = ".*linux-armv7.tar.gz"
