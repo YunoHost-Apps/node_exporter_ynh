@@ -10,6 +10,7 @@ set__ip_prometheus_server() {
        yunohost firewall reload --debug
        ynh_print_info "Node exporter now listen local server Prometheus"
     else
+        ynh_app_setting_set --app="$app" --key="ip_promtheus_server" value="$ip_prometheus_server"
         yunohost firewall reload --debug
         ynh_print_info "Node exporter now listen external server Prometheus"
     fi
@@ -22,11 +23,12 @@ set__ip_yunohost_server() {
        # value IP local to listen for service
        ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="127.0.0.1"
        ynh_systemctl --service="node_exporter" --action=restart
-    else
+    elif [ "$ip_yunohost_server" eq "1" ]
         # value IP server external to listen for service
         ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="$(curl -s https://ip.yunohost.org/)"
         ynh_systemctl --service="node_exporter" --action=restart
     fi
-     ynh_app_setting_set --key= --value="$ip_prometheus_server"
+     ynh_app_setting_set --key= --value="$ip_yunohost_server"
 }
 
+ynh_app_config_run $1
