@@ -7,8 +7,8 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
-ip_prometheus_server=127.0.0.1
-ynh_app_setting_set --app="$app" --key=ip_prometheus_server --value="$ip_prometheus_server"
+ip_prometheus_server="127.0.0.1"
+ynh_app_setting_set --app="$app" --key="ip_prometheus_server" --value="$ip_prometheus_server"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
