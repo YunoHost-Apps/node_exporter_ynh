@@ -31,6 +31,10 @@ disk = "12M"
 ram.build = "75M"
 ram.runtime = "9M"
 
+[install]
+    [install.domain]
+    type = "domain"
+
 [resources]
     [resources.sources]
     [resources.sources.main]
