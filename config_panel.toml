@@ -4,7 +4,7 @@ version = "1.0"
     name.en = "IP Prometheus Server externe ?"
     name.fr = "IP du serveur Prometheus externe ?"
 
-        [main.ip_prometheus_server]
+        [main.ip_prometheus.ip_prometheus_server]
         ask = "IP du serveur Promtheus"
         type = "string"
         help.en = "If your Prometheus server in on the same server let 127.0.0.1, if your Prometheus server is external with public address add after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
