@@ -4,11 +4,16 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-ip_yunohost_server="$(curl -s https://ip.yunohost.org/)"
 
 line_port=$(iptables -xvnL --line-numbers |grep $port |cut -d' ' -f1)
 line_port6=$(ip6tables -xvnL --line-numbers |grep $port |cut -d' ' -f1)
 
 if [ -z $ip_prometheus_server ]; then
 	ip_prometheus_server=$(ynh_app_setting_get $app ip_prometheus_server)
+fi
+
+if [ "$ip_prometheus_server" == "127.0.0.1" ]; then
+	ip_yunohost_server="127.0.0.1"
+elif [ "$ip_prometheus_server" != "127.0.0.1" ]; then
+	ip_yunohost_server="$(curl -s https://ip.yunohost.org/)"
 fi
