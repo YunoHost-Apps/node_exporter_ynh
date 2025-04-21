@@ -6,6 +6,10 @@ source /usr/share/yunohost/helpers
 set__ip_prometheus_server() {
     if [ "$ip_prometheus_server" == "127.0.0.1" ]; then
        ynh_app_setting_set --app="$app" --key=ip_prometheus_server --value="127.0.0.1"
+       # value IP local to listen for service
+       ynh_app_setting_set_default --app=$app --key=ip_yunohost_server value="127.0.0.1"
+       systemctl daemon-reload
+       ynh_systemctl --service="node_exporter" --action=reload
 
        if [ -f "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport" ] then;
 		# Remove YunoHost hook
@@ -22,8 +26,11 @@ set__ip_prometheus_server() {
         mkdir -p "$hook_extra_conf_dir"
         ynh_config_add --template="80-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
         chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
-
+        # value IP server external to listen for service
+        ynh_app_setting_set_default --app=$app --key=ip_yunohost_server value="$(curl -s https://ip.yunohost.org/)"
+        systemctl daemon-reload
         ynh_systemctl --service="node_exporter" --action=reload
+
         yunohost firewall reload --debug
 		# ignore diagnosis port $port unreacheable for IPv6
 		yunohost diagnosis ignore --filter ports port=$port
