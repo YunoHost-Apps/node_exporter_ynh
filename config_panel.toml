@@ -10,7 +10,6 @@ version = "1.0"
 
         [main.location_prometheus.ip_yunohost_server]
         ask = "IP listen by Promotheus"
-        default = "127.0.0.1"
         type = "string"
         visible = "external"
         help = "by default with local Prometheus the node listen `127.0.0.1`, if external prometheus server enabled, must be replaced by the IP server = `$(curl -s https://ip.yunohost.org/)`"
@@ -18,7 +17,6 @@ version = "1.0"
 
         [main.location_prometheus.ip_prometheus_server]
         ask = "IP Server Prometheus"
-        default = "127.0.0.1"
         type = "string"
         visible = "external"
         help = "Your Prometheus server IP, by default local `127.0.0.1`. If external Prometheus server enabled, add the Promrtheus IPv4 after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
