@@ -43,9 +43,9 @@ ynh_systemctl --service="$app" --action="start"
 #=================================================
 ynh_script_progression "Adding $app's configuration files..."
 
-# mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
-# ynh_config_add --template="80-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
-# chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
+ynh_config_add --template="80-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
 
 #=================================================
 # RELOAD FIREWALL

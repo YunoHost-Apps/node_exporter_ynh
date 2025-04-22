@@ -19,7 +19,10 @@ fi
 ynh_config_remove_systemd
 
 # Remove YunoHost hook
-ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+
+# Remove diagnosis ignore
+yunohost diagnosis unignore --filter ports port=$port
 
 #=================================================
 # END OF SCRIPT
