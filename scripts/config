@@ -44,10 +44,10 @@ ynh_app_config_apply() {
 
    if [ "${changed[ip_yunohost_server]}" == "true" ] && [ "$ip_yunohost_server" == "127.0.0.1" ]; then
        ynh_setting_set --app="$app" --key="ip_yunohost_server" value="127.0.0.1"
-       yunohost firewall reload
+       yunohost firewall reload --debug
    elif  [ "${changed[ip_yunohost_server]}" == "true" ] && [ "$ip_yunohost_server" != "127.0.0.1" ]; then
        ynh_setting_set --app="$app" --key="ip_yunohost_server" value="$(curl -s https://ip.yunohost.org/)"
-       yunohost firewall reload
+       yunohost firewall reload --debug
    fi
 
 }
