@@ -6,40 +6,42 @@ source /usr/share/yunohost/helpers
 ynh_abort_if_errors
 
 ynh_app_config_validate() {
-    _ynh_app_config_validate
-
-    if [ "${changed[external]}" == "true" ] && [ "$external" -eq "1" ] && [ "$ip_yunohost_server" == "127.0.0.1" ]
+    if [ "$external" -eq "1" ] && [ "$ip_yunohost_server" == "127.0.0.1" ]
     then
          ynh_die --message="You need to change the IP listen by Promotheus by the IP server = `$(curl -s https://ip.yunohost.org/)`"
-    elif [ "${changed[external]}" == "true" ] && [ "$external" -eq "1" ] && [ "$ip_prometheus_server" == "127.0.0.1" ]
+    elif [ "$external" -eq "1" ] && [ "$ip_prometheus_server" == "127.0.0.1" ]
     then
         ynh_die --message="You need to choose an external IP for Promotheus"
-    elif [ "${changed[external]}" == "true" ] && [ "$external" -eq "0" ] && [ "$ip_yunohost_server" != "127.0.0.1" ]
+    elif [ "$external" -eq "0" ] && [ "$ip_yunohost_server" != "127.0.0.1" ]
     then
         ynh_die --message="You need to choose `127.0.0.1` for IP for Promotheus"
-    elif [ "${changed[external]}" == "true" ] && [ "$external" -eq "0" ] && [ "$ip_prometheus_server" != "127.0.0.1" ]
+    elif [ "$external" -eq "0" ] && [ "$ip_prometheus_server" != "127.0.0.1" ]
     then
         ynh_die --message="You need to choose `127.0.0.1` to listen local Promotheus"
     fi
+    _ynh_app_config_validate
 }
 
 ynh_app_config_apply() {
     _ynh_app_config_apply
 
-    if [ "${changed[external]}" == "true" ] && [ "$external" -eq "0" ]; then
-        systemctl daemon-reload
-        ynh_systemctl --service="node_exporter" --action=restart
-        yunohost firewall reload --debug
-    elif [ "${changed[external]}" == "true" ] && [ "$external" -eq "1" ]; then
-        # value IP server external to listen for service
-        ynh_app_setting_set --app="$app" --key="ip_yunohost_server" value="$(curl -s https://ip.yunohost.org/)"
-        systemctl daemon-reload
-        ynh_systemctl --service="node_exporter" --action=restart
-        yunohost firewall reload --debug
-    fi
+    ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+
+    ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+    chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+
+    yunohost firewall reload --debug
+
+    ynh_config_remove_systemd
+
+    ynh_config_add_systemd
+    yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
+
+    systemctl daemon-reload
+    ynh_systemctl --service="node_exporter" --action=restart
 }
 
-ynh_app_config_run "$1"
-
-
-
+#=================================================
+# SELECT THE ACTION FOLLOWING THE GIVEN ARGUMENT
+#=================================================
+ynh_app_config_run $1
