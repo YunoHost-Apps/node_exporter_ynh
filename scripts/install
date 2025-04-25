@@ -55,7 +55,7 @@ ynh_script_progression "Reload firewall..."
 yunohost firewall reload --debug
 
 # ignore diagnosis port $port unreacheable for IPv6
-yunohost diagnosis run ports
+yunohost diagnosis run ip ports
 yunohost diagnosis ignore --filter ports port=$port
 
 #=================================================
