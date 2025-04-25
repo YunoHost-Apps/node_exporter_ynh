@@ -8,6 +8,7 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 ynh_app_setting_set_default --key=ip_prometheus_server --value="127.0.0.1"
+ynh_app_setting_set_default --key=ip_yunohost_server --value="127.0.0.1"
 
 #=================================================
 # STOP SYSTEMD SERVICE
