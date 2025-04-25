@@ -1,3 +1,9 @@
+version = "1.0"
+
+[main]
+
+name = "Configuration for listen Prometheus"
+
     [main.location_prometheus]
     name = "External or local Prometheus Server ?"
 
