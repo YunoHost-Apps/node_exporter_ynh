@@ -37,10 +37,11 @@ ram.runtime = "9M"
 
     [install.path]
     type = "path"
-    default = "/metrics"
+    default = "/"
 
     [install.ip_allowlist]
     type = "tags"
+    optional = true
 
 [resources]
 
