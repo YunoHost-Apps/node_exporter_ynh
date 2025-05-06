@@ -1,0 +1,5 @@
+allow 127.0.0.1;
+{% for ip in ip_allowlist.split(',') %}
+allow {{ ip }};
+{% endfor %}
+deny all;
