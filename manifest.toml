@@ -35,6 +35,16 @@ ram.runtime = "9M"
     [install.domain]
     type = "domain"
 
+    [install.path]
+    type = "path"
+    default = "/metrics"
+
+    [install.ip_allowlist]
+    type = "tags"
+
+    [install.basicauth]
+    type = "tags"
+
 [resources]
 
     [resources.sources]
@@ -58,10 +68,8 @@ ram.runtime = "9M"
 
     [resources.permissions]
     main.url = "/"
-    main.allowed = "admins"
-    api.url = "/metrics"
-    api.allowed = "visitors"
+    main.allowed = "visitors"
+    main.protected = true
 
     [resources.ports]
     main.default = 9100
-    main.exposed = "TCP"

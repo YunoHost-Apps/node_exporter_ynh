@@ -22,6 +22,10 @@ chmod +x "$install_dir/node_exporter"
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."
 
+ynh_config_add_nginx
+
+mkdir "/etc/nginx/conf.d/$domain.d/$app.d/"
+
 # Create a dedicated systemd config
 ynh_config_add_systemd
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
