@@ -42,9 +42,6 @@ ram.runtime = "9M"
     [install.ip_allowlist]
     type = "tags"
 
-    [install.basicauth]
-    type = "tags"
-
 [resources]
 
     [resources.sources]
