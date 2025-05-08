@@ -22,6 +22,10 @@ chmod +x "$install_dir/node_exporter"
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."
 
+usermod -a -G ssl-cert "$app"
+
+ynh_config_add --template="web-config.yml" --destination="$install_dir/web-config.yml"
+
 ynh_config_add_nginx
 
 mkdir "/etc/nginx/conf.d/$domain.d/$app.d/"
