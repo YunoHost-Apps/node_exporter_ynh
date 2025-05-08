@@ -2,5 +2,3 @@
 
 # Add only promotheus server accept rules
 iptables -A INPUT -s __IP_PROMETHEUS_SERVER__ -p tcp -m tcp --dport __PORT__ -j ACCEPT
-ip6tables -R INPUT __LINE_PORT6__ -p tcp --dport __PORT__ -j DROP
-iptables -R INPUT __LINE_PORT_EXCLUDE__ -p tcp --dport __PORT__ -j DROP
