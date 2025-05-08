@@ -48,9 +48,10 @@ ram.runtime = "9M"
 
     [install.ip_prometheus_server]
     ask = "IP Server Prometheus"
-    type = "string"
+    type = "tags"
     default = "127.0.0.1"
-    help = "Your Prometheus server IP, by default local `127.0.0.1`. If external(s) Prometheus server(s) enabled, add the Prometheus IP(s)"
+    help = "Your Prometheus server IP, by default local `127.0.0.1`. If external Prometheus server enabled, add the Prometheus(s) IPv4(s)"
+
 
 [resources]
 
@@ -81,4 +82,4 @@ ram.runtime = "9M"
 
     [resources.ports]
     main.default = 9100
-    main.exposed = "TCP"
+
