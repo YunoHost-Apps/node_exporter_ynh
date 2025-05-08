@@ -9,7 +9,7 @@ Type=simple
 User=__APP__
 Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/node_exporter --web.listen-address=127.0.0.1:__PORT__ --web.telemetry-path="__PATH__/metrics"
+ExecStart=__INSTALL_DIR__/node_exporter --web.listen-address=127.0.0.1:__PORT__ --web.telemetry-path="__PATH__/metrics" --web.config.file="__APP__/web-config.yml"
 Restart=always
 RestartSec=1
 StartLimitInterval=0
