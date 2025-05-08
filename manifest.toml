@@ -50,7 +50,7 @@ ram.runtime = "9M"
     ask = "IP Server Prometheus"
     type = "string"
     default = "127.0.0.1"
-    help = "Your Prometheus server IP, by default local `127.0.0.1`. If external Prometheus server enabled, add the Promrtheus IPv4 after the IP a CIDR `/32` ( <IPv4_ADDRESS>/32 )"
+    help = "Your Prometheus server IP, by default local `127.0.0.1`. If external(s) Prometheus server(s) enabled, add the Prometheus IP(s)"
 
 [resources]
 
