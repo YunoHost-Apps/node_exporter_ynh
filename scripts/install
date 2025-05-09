@@ -24,6 +24,9 @@ chmod +x "$install_dir/node_exporter"
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."
 
+ip_yunohost_server=$(curl -s https://ip.yunohost.org/)
+ynh_app_setting_set --app=$app --key=ip_yunohost_server --value=$ip_yunohost_server
+
 # Create a dedicated systemd config
 ynh_config_add_systemd
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
@@ -53,10 +56,6 @@ chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
 ynh_script_progression "Reload firewall..."
 
 yunohost firewall reload --debug
-
-# ignore diagnosis port $port unreacheable for IPv6
-#yunohost diagnosis run ip ports
-#yunohost diagnosis ignore --filter ports port=$port
 
 #=================================================
 # END OF SCRIPT

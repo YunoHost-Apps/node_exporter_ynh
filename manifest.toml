@@ -40,18 +40,11 @@ ram.runtime = "9M"
     type = "boolean"
     default = false
 
-    [install.ip_yunohost_server]
-    ask = "IP listen by Promotheus"
-    type = "string"
-    default = "127.0.0.1"
-    help = "by default with local Prometheus the node listen `127.0.0.1`, if external prometheus server enabled, must be replaced by the IP server = `$(curl -s https://ip.yunohost.org/)`"
-
     [install.ip_prometheus_server]
     ask = "IP Server Prometheus"
     type = "tags"
     default = "127.0.0.1"
-    help = "Your Prometheus server IP, by default local `127.0.0.1`. If external Prometheus server enabled, add the Prometheus(s) IPv4(s)"
-
+    help = "Your Prometheus server IP is local by default local `127.0.0.1`, if external(s) Prometheus server(s) enabled, add the Prometheus(s) IPv4(s)"
 
 [resources]
 

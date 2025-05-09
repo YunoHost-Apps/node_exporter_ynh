@@ -7,8 +7,24 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
-ynh_app_setting_set_default --key=ip_prometheus_server --value="127.0.0.1"
-ynh_app_setting_set_default --key=ip_yunohost_server --value="127.0.0.1"
+#=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+
+if [ -z "${ip_yunohost_server:-}" ]; then
+    ip_yunohost_server=$(curl -s https://ip.yunohost.org/)
+    ynh_app_setting_set --app=$app --key=ip_yunohost_server --value="$ip_yunohost_server"
+fi
+
+if [ -z "${ip_prometheus_server:-}" ]; then
+    ip_prometheus_server="127.0.0.1"
+    ynh_app_setting_set_default --key=ip_prometheus_server --value="127.0.0.1"
+fi
+
+if [ -z "$external:-}" ]; then
+    external=false
+    ynh_app_setting_set_default --app=$app --key=external --value=$external
+fi
 
 #=================================================
 # STOP SYSTEMD SERVICE
@@ -55,10 +71,6 @@ ynh_systemctl --service="$app" --action="start"
 ynh_script_progression "Reloading firewall..."
 
 yunohost firewall reload --debug
-
-# ignore diagnosis port $port unreacheable for IPv6
-#yunohost diagnosis run ip ports
-#yunohost diagnosis ignore --filter ports port=$port
 
 #=================================================
 # END OF SCRIPT

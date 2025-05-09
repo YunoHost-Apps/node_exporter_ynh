@@ -6,15 +6,9 @@ source /usr/share/yunohost/helpers
 ynh_abort_if_errors
 
 ynh_app_config_validate() {
-    if [ "$external" -eq "1" ] && [ "$ip_yunohost_server" == "127.0.0.1" ]
+    if [ "$external" -eq "1" ] && [ "$ip_prometheus_server" == "127.0.0.1" ]
     then
-         ynh_die --message="You need to change the IP listen by Promotheus by the IP server = `$(curl -s https://ip.yunohost.org/)`"
-    elif [ "$external" -eq "1" ] && [ "$ip_prometheus_server" == "127.0.0.1" ]
-    then
-        ynh_die --message="You need to choose an external IP for Promotheus"
-    elif [ "$external" -eq "0" ] && [ "$ip_yunohost_server" != "127.0.0.1" ]
-    then
-        ynh_die --message="You need to choose `127.0.0.1` for IP for Promotheus"
+        ynh_die --message="You need to choose external(s) IP for Promotheus"
     elif [ "$external" -eq "0" ] && [ "$ip_prometheus_server" != "127.0.0.1" ]
     then
         ynh_die --message="You need to choose `127.0.0.1` to listen local Promotheus"
@@ -32,12 +26,7 @@ ynh_app_config_apply() {
 
     yunohost firewall reload --debug
 
-    ynh_config_remove_systemd
-
-    ynh_config_add_systemd
-    yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
-
-    systemctl daemon-reload
+    #restart service
     ynh_systemctl --service="node_exporter" --action=restart
 }
 
