@@ -20,14 +20,19 @@ ynh_restore "$install_dir"
 #=================================================
 ynh_script_progression "Restoring system configurations related to $app..."
 
+ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
+ynh_restore "/etc/nginx/conf.d/$domain.d/$app.d/"
+
 ynh_restore "/etc/systemd/system/$app.service"
 systemctl enable "$app.service" --quiet
-yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
+yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log"
 
 #=================================================
 # RELOAD NGINX AND PHP-FPM OR THE APP SERVICE
 #=================================================
-ynh_script_progression "Reloading NGINX web server and $app's service..."
+ynh_script_progression "Reloading NGINX web server and start $app's service..."
+
+ynh_systemctl --service=nginx --action=reload
 
 ynh_systemctl --service="$app" --action="start"
 
