@@ -49,6 +49,8 @@ if [ "$external" -eq "1" ]; then
 	chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
 fi
 
+ynh_app_config_validate
+
 #=================================================
 # RELOAD FIREWALL
 #=================================================

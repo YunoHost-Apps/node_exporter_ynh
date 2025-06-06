@@ -6,10 +6,10 @@ source /usr/share/yunohost/helpers
 ynh_abort_if_errors
 
 ynh_app_config_validate() {
-    if [ "$external" -eq "1" ] && [ "$bind_address" == "127.0.0.1" ]
+    if [ "$external" -eq "1" ] && [ "$ip_prometheus_server" == "127.0.0.1" ]
     then
         ynh_die --message="You need to choose external(s) IP for Promotheus"
-    elif [ "$external" -eq "0" ] && [ "$bind_address" != "127.0.0.1" ]
+    elif [ "$external" -eq "0" ] && [ "$ip_prometheus_server" != "127.0.0.1" ]
     then
         ynh_die --message="You need to choose `127.0.0.1` to listen local Promotheus"
     fi
