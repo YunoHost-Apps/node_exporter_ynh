@@ -24,7 +24,6 @@ chmod +x "$install_dir/node_exporter"
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."
 
-
 # Create a dedicated systemd config
 ynh_config_add_systemd
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
@@ -44,9 +43,11 @@ ynh_systemctl --service="$app" --action="start"
 #=================================================
 ynh_script_progression "Adding $app's configuration files..."
 
-mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
-ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
-chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+if [ "$external" -eq "1" ]; then
+	mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
+	ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+	chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+fi
 
 #=================================================
 # RELOAD FIREWALL
