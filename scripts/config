@@ -22,11 +22,10 @@ ynh_app_config_apply() {
     then
         ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
         chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
-    elif [ "$external" -eq "0" ]
+    elif [ "$external" -eq "0" ] && [ -f "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport" ]
     then
         ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
     fi
-
 
     yunohost firewall reload --debug
 
