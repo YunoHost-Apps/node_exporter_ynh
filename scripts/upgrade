@@ -11,10 +11,6 @@ source /usr/share/yunohost/helpers
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
 
-if [ -z "${ip_yunohost_server:-}" ]; then
-    ip_yunohost_server=$(curl -s https://ip.yunohost.org/)
-    ynh_app_setting_set --app=$app --key=ip_yunohost_server --value="$ip_yunohost_server"
-fi
 
 if [ -z "${ip_prometheus_server:-}" ]; then
     ip_prometheus_server="127.0.0.1"
