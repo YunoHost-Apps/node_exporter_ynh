@@ -22,9 +22,6 @@ if [ -z "${external:-}" ]; then
     ynh_app_setting_set_default --app=$app --key=external --value="$external"
 fi
 
-if [ -z "${bind_address:-}" ]; then
-    bind_address="127.0.0.1"
-fi
 
 #=================================================
 # STOP SYSTEMD SERVICE
