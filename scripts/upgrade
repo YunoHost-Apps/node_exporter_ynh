@@ -22,8 +22,12 @@ if [ -z "${external:-}" ]; then
     ynh_app_setting_set_default --app=$app --key=external --value="$external"
 fi
 
+if [ -z "${bind_address:-}" ]; then
+    bind_address="127.0.0.1"
+    ynh_app_setting_set_default --app=$app --key=bind_address --value="$bind_address"
+fi
 
-#=================================================
+=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
 ynh_script_progression "Stopping $app's systemd service..."
@@ -43,10 +47,12 @@ ynh_setup_source --dest_dir="$install_dir" --full_replace
 #=================================================
 ynh_script_progression "Updating $app's configuration files..."
 
-if [ "$external" == true ]; then
-mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
-ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
-chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+if [ "$external" -eq "1" ]; then
+    bind_address="0.0.0.0"
+    ynh_app_setting_set --key="bind_address" --value="$bind_address"
+    mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
+    ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+    chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
 fi
 
 #=================================================
