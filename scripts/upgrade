@@ -14,12 +14,16 @@ source /usr/share/yunohost/helpers
 
 if [ -z "${ip_prometheus_server:-}" ]; then
     ip_prometheus_server="127.0.0.1"
-    ynh_app_setting_set_default --key=ip_prometheus_server --value="127.0.0.1"
+    ynh_app_setting_set_default --key=ip_prometheus_server --value="$ip_prometheus_server"
 fi
 
 if [ -z "${external:-}" ]; then
     external=false
-    ynh_app_setting_set_default --app=$app --key=external --value=$external
+    ynh_app_setting_set_default --app=$app --key=external --value="$external"
+fi
+
+if [ -z "${bind_address:-}" ]; then
+    bind_address="127.0.0.1"
 fi
 
 #=================================================
@@ -44,7 +48,7 @@ ynh_script_progression "Updating $app's configuration files..."
 
 if [ "$external" == true ]; then
 mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
-ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
+ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
 chmod 644 "/etc/yunohost/hooks.d/post_iptable_rules/80-nodexport"
 fi
 
