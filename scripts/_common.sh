@@ -4,9 +4,9 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-if [ "$external" -eq "1" ]; then
+if [ "$external" == false ]; then
 	bind_address="127.0.0.1"
-elif [ "$external" -eq "0" ]; then
+elif [ "$external" == true ]; then
 	bind_address="0.0.0.0"
 fi
 

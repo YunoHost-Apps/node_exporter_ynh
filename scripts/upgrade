@@ -20,11 +20,8 @@ fi
 if [ -z "${external:-}" ]; then
     external=false
     ynh_app_setting_set_default --app=$app --key=external --value="$external"
-fi
-
-if [ -z "${bind_address:-}" ]; then
     bind_address="127.0.0.1"
-    ynh_app_setting_set_default --app=$app --key=bind_address --value="$bind_address"
+    ynh_app_setting_set_default --key="bind_address" --value="$bind_address"
 fi
 
 #=================================================
@@ -47,7 +44,7 @@ ynh_setup_source --dest_dir="$install_dir" --full_replace
 #=================================================
 ynh_script_progression "Updating $app's configuration files..."
 
-if [ "$external" -eq "1" ]; then
+if [ "$external" == true ]; then
     bind_address="0.0.0.0"
     ynh_app_setting_set --key="bind_address" --value="$bind_address"
     mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
