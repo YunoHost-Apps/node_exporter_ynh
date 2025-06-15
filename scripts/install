@@ -24,6 +24,16 @@ chmod +x "$install_dir/node_exporter"
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."
 
+if [[ "$external" -eq "1" ]]; then
+    bind_address="0.0.0.0"
+    ynh_app_setting_set_default --key="bind_address" --value="$bind_address"
+fi
+
+if [[ "$external" -eq "0" ]]; then
+	bind_address="127.0.0.1"
+	ynh_app_setting_set_default --key="bind_address" --value="$bind_address"
+fi
+
 # Create a dedicated systemd config
 ynh_config_add_systemd
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
@@ -44,16 +54,9 @@ ynh_systemctl --service="$app" --action="start"
 ynh_script_progression "Adding $app's configuration files..."
 
 if [ "$external" -eq "1" ]; then
-    bind_address="0.0.0.0"
-    ynh_app_setting_set_default --key="bind_address" --value="$bind_address"
 	mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
 	ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
 	chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
-fi
-
-if [ "$external" -eq "0" ]; then
-	bind_address="127.0.0.1"
-	ynh_app_setting_set_default --key="bind_address" --value="$bind_address"
 fi
 
 ynh_app_config_validate
