@@ -67,6 +67,11 @@ if [ -z ${bind_address:-} ]; then
     bind_address="127.0.0.1"
 fi
 
+if [ -z ${ip_prometheus_server:-} ]; then
+    ynh_app_setting_set --key=ip_prometheus_server --value="127.0.0.1"
+    ip_prometheus_server="127.0.0.1"
+fi
+
 #=================================================
 # REAPPLY SYSTEM CONFIGURATION
 #=================================================
