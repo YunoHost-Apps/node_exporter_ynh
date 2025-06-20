@@ -16,4 +16,4 @@ name = "Configuration for listen Prometheus"
         [main.location_prometheus.ip_prometheus_server]
         ask = "IP(s) Server Prometheus"
         type = "tags"
-        help = "Your Prometheus server IP is by default local `127.0.0.1`. If external(s) Prometheus server(s) enabled, add the Prometheus IPv4(s)"
+        help = "if your Prometheus server IP is local put here by default local `127.0.0.1`. If external(s) Prometheus server(s) enabled, add the server Prometheus IPv4(s) and remove `127.0.0.1`"
