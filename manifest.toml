@@ -7,7 +7,7 @@ name = "Node Exporter"
 description.en = "Monitor YunoHost with prometheus"
 description.fr = "Surveiller YunoHost avec prometheus"
 
-version = "1.9.1~ynh2"
+version = "1.9.1~ynh3"
 
 maintainers = []
 
@@ -35,6 +35,17 @@ ram.runtime = "9M"
     [install.domain]
     type = "domain"
 
+    [install.external]
+    ask.en = "Is your Server Promotheus on external server ?"
+    type = "boolean"
+    default = false
+
+    [install.ip_prometheus_server]
+    ask = "IP Server Prometheus"
+    type = "tags"
+    default = "127.0.0.1"
+    help = "Your Prometheus server IP is local by default local `127.0.0.1`, if external(s) Prometheus server(s) enabled, add the Prometheus(s) IPv4(s)"
+
 [resources]
 
     [resources.sources]
@@ -46,7 +57,7 @@ ram.runtime = "9M"
     arm64.sha256 = "848f139986f63232ced83babe3cad1679efdbb26c694737edc1f4fbd27b96203"
     armhf.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-armv7.tar.gz"
     armhf.sha256 = "f04c95c9c474516b06ab10e34a663992ccad4c9185596e404f02790ec23d83d9"
-    
+
     autoupdate.strategy = "latest_github_release"
     autoupdate.asset.amd64 = ".*linux-amd64.tar.gz"
     autoupdate.asset.armhf = ".*linux-armv7.tar.gz"
@@ -63,5 +74,6 @@ ram.runtime = "9M"
     api.allowed = "visitors"
 
     [resources.ports]
+    # NB : The port is actually exposed via a custom iptable rule to only expose it to the prometheus IP (if set as 'external')
     main.default = 9100
-    main.exposed = "TCP"
+
