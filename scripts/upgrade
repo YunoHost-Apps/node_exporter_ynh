@@ -8,6 +8,36 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+
+
+if [ -z ${external:-} ]; then
+    ynh_app_setting_set --key=external --value=0
+    external=0
+fi
+
+# Fix external as a boolean
+if [ "${external,,}" = "yes" ]; then
+    ynh_app_setting_set --key=external --value=1
+    external=1
+
+elif [ "${external,,}" = "no" ]; then
+    ynh_app_setting_set --key=external --value=0
+    external=0
+fi
+
+if [ -z ${bind_address:-} ]; then
+    ynh_app_setting_set --key=bind_address --value="127.0.0.1"
+    bind_address="127.0.0.1"
+fi
+
+if [ -z ${ip_prometheus_server:-} ]; then
+    ynh_app_setting_set --key=ip_prometheus_server --value="127.0.0.1"
+    ip_prometheus_server="127.0.0.1"
+fi
+
+#=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
 ynh_script_progression "Stopping $app's systemd service..."
@@ -22,7 +52,11 @@ ynh_script_progression "Upgrading source files..."
 # Download, check integrity, uncompress and patch the source from manifest.toml
 ynh_setup_source --dest_dir="$install_dir" --full_replace
 
-chmod +x "$install_dir/node_exporter"
+#=================================================
+# UPDATE A CONFIG FILE
+#=================================================
+ynh_script_progression "Updating $app's configuration files..."
+
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATION
@@ -38,6 +72,28 @@ yunohost service add "$app" --description="Monitor YunoHost with prometheus" --l
 ynh_script_progression "Starting $app's systemd service..."
 
 ynh_systemctl --service="$app" --action="start"
+
+#=================================================
+# SPECIFIC SETUP
+#=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression "Adding $app's configuration files..."
+
+if [ $external -eq 1 ]; then
+    mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
+    ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+    chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+fi
+
+ynh_app_config_validate
+
+#=================================================
+# RELOAD FIREWALL
+#=================================================
+ynh_script_progression "Reloading firewall..."
+
+yunohost firewall reload --debug
 
 #=================================================
 # END OF SCRIPT
