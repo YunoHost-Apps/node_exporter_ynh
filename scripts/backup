@@ -27,6 +27,11 @@ ynh_backup "/etc/nginx/conf.d/$domain.d/$app.d/"
 # Backup the systemd service unit
 ynh_backup "/etc/systemd/system/$app.service"
 
+if [ "$external" -eq "1" ]; then
+# Backup the hook iptables
+ynh_backup "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+fi
+
 #=================================================
 # END OF SCRIPT
 #=================================================

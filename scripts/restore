@@ -27,6 +27,11 @@ ynh_restore "/etc/systemd/system/$app.service"
 systemctl enable "$app.service" --quiet
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log"
 
+# Restore YunoHost hook if needed
+if [ "$external" -eq "1" ]; then
+ynh_restore "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+fi
+
 #=================================================
 # RELOAD NGINX AND PHP-FPM OR THE APP SERVICE
 #=================================================
@@ -35,6 +40,14 @@ ynh_script_progression "Reloading NGINX web server and start $app's service..."
 ynh_systemctl --service=nginx --action=reload
 
 ynh_systemctl --service="$app" --action="start"
+
+#=================================================
+# RELOAD FIREWALL
+#=================================================
+
+ynh_script_progression "Reloading firewall..."
+
+yunohost firewall reload --debug
 
 #=================================================
 # END OF SCRIPT

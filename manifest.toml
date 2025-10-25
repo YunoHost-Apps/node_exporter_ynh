@@ -7,7 +7,7 @@ name = "Node Exporter"
 description.en = "Monitor YunoHost with prometheus"
 description.fr = "Surveiller YunoHost avec prometheus"
 
-version = "1.9.1~ynh2"
+version = "1.10.0~ynh1"
 
 maintainers = []
 
@@ -48,13 +48,13 @@ ram.runtime = "9M"
     [resources.sources]
 
     [resources.sources.main]
-    amd64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz"
-    amd64.sha256 = "becb950ee80daa8ae7331d77966d94a611af79ad0d3307380907e0ec08f5b4e8"
-    arm64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-arm64.tar.gz"
-    arm64.sha256 = "848f139986f63232ced83babe3cad1679efdbb26c694737edc1f4fbd27b96203"
-    armhf.url = "https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-armv7.tar.gz"
-    armhf.sha256 = "f04c95c9c474516b06ab10e34a663992ccad4c9185596e404f02790ec23d83d9"
-    
+    amd64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.10.0/node_exporter-1.10.0.linux-amd64.tar.gz"
+    amd64.sha256 = "6c2a4d886fc82743f7f97b8e0a0cd80ab0199939edce3cf0b9b36dad8d48d9b4"
+    arm64.url = "https://github.com/prometheus/node_exporter/releases/download/v1.10.0/node_exporter-1.10.0.linux-arm64.tar.gz"
+    arm64.sha256 = "ecd320c7578745007108e98ce170ea0d12e30480eabbce199a041cd62450a961"
+    armhf.url = "https://github.com/prometheus/node_exporter/releases/download/v1.10.0/node_exporter-1.10.0.linux-armv7.tar.gz"
+    armhf.sha256 = "131588ec506bd5c74f455fb149b2bdce35209d2b905ffd5cf8dcbc93a2ec2e94"
+
     autoupdate.strategy = "latest_github_release"
     autoupdate.asset.amd64 = ".*linux-amd64.tar.gz"
     autoupdate.asset.armhf = ".*linux-armv7.tar.gz"
@@ -70,4 +70,5 @@ ram.runtime = "9M"
     main.protected = true
 
     [resources.ports]
+    # NB : The port is actually exposed via a custom iptable rule to only expose it to the prometheus IP (if set as 'external')
     main.default = 9100
