@@ -28,13 +28,13 @@ elif [ "${external,,}" = "no" ]; then
 fi
 
 if [ -z ${bind_address:-} ]; then
-    ynh_app_setting_set --key=bind_address --value="127.0.0.1"
     bind_address="127.0.0.1"
+    ynh_app_setting_set --key=bind_address --value="$bind_address"
 fi
 
 if [ -z ${ip_prometheus_server:-} ]; then
-    ynh_app_setting_set --key=ip_prometheus_server --value="127.0.0.1"
     ip_prometheus_server="127.0.0.1"
+    ynh_app_setting_set --key=ip_prometheus_server --value="$ip_prometheus_server"
 fi
 
 #=================================================
@@ -84,6 +84,13 @@ if [ $external -eq 1 ]; then
     mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
     ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
     chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+    bind_address="0.0.0.0"
+    ynh_app_setting_set --key=bind_address --value="$bind_address"
+fi
+
+if [ $external -eq 0 ]; then
+    bind_address="127.0.0.1"
+    ynh_app_setting_set --key=bind_address --value="$bind_address"
 fi
 
 ynh_app_config_validate
