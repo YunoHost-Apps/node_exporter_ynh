@@ -35,16 +35,13 @@ ram.runtime = "9M"
     [install.domain]
     type = "domain"
 
-    [install.external]
-    ask.en = "Is your Server Promotheus on external server ?"
-    type = "boolean"
-    default = false
+    [install.path]
+    type = "path"
+    default = "/"
 
-    [install.ip_prometheus_server]
-    ask = "IP Server Prometheus"
+    [install.ip_allowlist]
     type = "tags"
-    default = "127.0.0.1"
-    help = "Your Prometheus server IP is local by default local `127.0.0.1`, if external(s) Prometheus server(s) enabled, add the Prometheus(s) IPv4(s)"
+    optional = true
 
 [resources]
 
@@ -69,11 +66,9 @@ ram.runtime = "9M"
 
     [resources.permissions]
     main.url = "/"
-    main.allowed = "admins"
-    api.url = "/metrics"
-    api.allowed = "visitors"
+    main.allowed = "visitors"
+    main.protected = true
 
     [resources.ports]
     # NB : The port is actually exposed via a custom iptable rule to only expose it to the prometheus IP (if set as 'external')
     main.default = 9100
-
