@@ -24,19 +24,19 @@ chmod +x "$install_dir/node_exporter"
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."
 
-if [ $external -eq 1 ]; then
-    bind_address="0.0.0.0"
-    ynh_app_setting_set_default --key="bind_address" --value="$bind_address"
-fi
+usermod -a -G ssl-cert "$app"
 
-if [ $external -eq 0 ]; then
-	bind_address="127.0.0.1"
-	ynh_app_setting_set_default --key="bind_address" --value="$bind_address"
-fi
+ynh_config_add --template="web-config.yml" --destination="$install_dir/web-config.yml"
+
+ynh_config_add_nginx
+
+mkdir "/etc/nginx/conf.d/$domain.d/$app.d/"
+
+ynh_config_add --jinja --template="allowlist.conf.j2" --destination="/etc/nginx/conf.d/$domain.d/$app.d/allowlist.conf"
 
 # Create a dedicated systemd config
 ynh_config_add_systemd
-yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
+yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
@@ -53,11 +53,12 @@ ynh_systemctl --service="$app" --action="start"
 #=================================================
 ynh_script_progression "Adding $app's configuration files..."
 
-if [ $external -eq 1 ]; then
-	mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
-	ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
-	chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
-fi
+# FIXME: watdo with this
+# if [ $external -eq 1 ]; then
+# 	mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
+# 	ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+# 	chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+# fi
 
 ynh_app_config_validate
 
