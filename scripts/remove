@@ -18,9 +18,9 @@ if ynh_hide_warnings yunohost service status "$app" >/dev/null; then
 fi
 ynh_config_remove_systemd
 
-# Remove YunoHost hook
+# Remove nftables configuration file
 if [ "$external" -eq "1" ]; then
-ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+    ynh_safe_rm "/etc/nftables.d/$app.conf"
 fi
 
 #=================================================

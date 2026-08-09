@@ -37,6 +37,11 @@ if [ -z ${ip_prometheus_server:-} ]; then
     ynh_app_setting_set --key=ip_prometheus_server --value="$ip_prometheus_server"
 fi
 
+# This is now handled by nftables
+if [ -f "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport" ]; then
+    ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+fi
+
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
@@ -81,11 +86,9 @@ ynh_systemctl --service="$app" --action="start"
 ynh_script_progression "Adding $app's configuration files..."
 
 if [ $external -eq 1 ]; then
-    mkdir -pm 0755 "/etc/yunohost/hooks.d/post_iptable_rules/"
-    ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
-    chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
     bind_address="0.0.0.0"
     ynh_app_setting_set --key=bind_address --value="$bind_address"
+    ynh_config_add --template="nftables.conf" --destination="/etc/nftables.d/$app.conf"
 fi
 
 if [ $external -eq 0 ]; then
