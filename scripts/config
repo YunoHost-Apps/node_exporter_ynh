@@ -22,13 +22,13 @@ ynh_app_config_apply() {
     then
         bind_address="0.0.0.0"
         ynh_app_setting_set --key="bind_address" --value="$bind_address"
-        ynh_config_add --template="50-nodexport" --destination="/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
-        chmod u+rx "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
-    elif [ "$external" -eq "0" ] && [ -f "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport" ]
+        # Add nftables configuration file
+        ynh_config_add --template="nftables.conf" --destination="/etc/nftables.d/$app.conf"
+    elif [ "$external" -eq "0" ] && [ -f "/etc/nftables.d/$app.conf" ]
     then
         bind_address="127.0.0.1"
         ynh_app_setting_set --key="bind_address" --value="$bind_address"
-        ynh_safe_rm "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+        ynh_safe_rm "/etc/nftables.d/$app.conf"
     fi
     # reinitizialize system $app
     ynh_systemctl --service="$app" --action="stop"

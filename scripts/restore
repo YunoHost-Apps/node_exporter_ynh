@@ -24,9 +24,9 @@ ynh_restore "/etc/systemd/system/$app.service"
 systemctl enable "$app.service" --quiet
 yunohost service add "$app" --description="Monitor YunoHost with prometheus" --log="/var/log/$app/$app.log" --needs_exposed_ports "$port"
 
-# Restore YunoHost hook if needed
+# Restore the nftables configuration file
 if [ "$external" -eq "1" ]; then
-ynh_restore "/etc/yunohost/hooks.d/post_iptable_rules/50-nodexport"
+    ynh_restore "/etc/nftables.d/$app.conf"
 fi
 
 #=================================================
